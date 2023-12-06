@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="title">
+        Chi tiết lớp học
+    </div>
+
+    <div class="out-line-content">
+        <div class="title-content">Miêu tả lớp học</div>
+
+        <div class="content">
+            Tên lớp học: {{classs.className}}
+        </div>
+
+        <div class="content">
+            Tên giáo viên: {{classs.tutorName}}
+        </div>
+
+        <div class="content">
+            Link khóa học: {{classs.classLink}}
+        </div>
+        <div class="content">
+            Tổng số học sinh: {{classs.totalStudents}}
+        </div>
+
+        <div class="out-line-title">
+            <div class="title-content">{{typeShow[idShow -1].title}}</div>
+        </div>
+
+        <div class="content">
+            {{typeShow[idShow - 1].list}}{{cnt}}
+        </div>
+
+        <div style="display: flex; justify-content: space-between;">
+            <!-- <select name="type" [(ngModel)]="idShow" (change)="changeTypeList()">
+                <option value="1">Danh sách học sinh</option>
+                <option value="2">Danh sách học sinh đang chờ</option>
+            </select> -->
+
+            <div></div>
+
+            <button *ngIf="idShow == 1" class="btn btn-add" (click)="openModal()">Thêm học sinh</button>
+        </div>
+
+        <table class="table-custom" *ngIf="idShow == 1">
+            <thead>
+                <tr class="row">
+                    <th class="text-center" style="width: 200px;">Tên học sinh</th>
+                    <th class="text-center" style="width: 150px;">Số điện thoại</th>
+                    <th class="text-center" style="width: 250px;">Địa chỉ</th>
+                    <th class="text-center" style="width: 250px;">Gmail</th>
+                    <th class="text-center" style="width: 200px;">Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of classs.students; let index = index" class="row">
+                    <td class="text-center" style="width: 200px;">{{item.userName}}</td>
+                    <td class="text-center" style="width: 150px;">{{item.userPhone}}</td>
+                    <td class="text-center" style="width: 250px;">{{item.userAddress}}</td>
+                    <td class="text-center" style="width: 250px;">{{item.userEmail}}</td>
+                    <td class="text-center" style="width: 200px;">
+                        <button class="btn btn-delete" (click)="deleteStudent(item.userId)">Xóa</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+</div>
+<app-student-form-class [data]="modalData" [isOpen]="isModalOpen" (closeModal)="onCloseModal()"></app-student-form-class>
